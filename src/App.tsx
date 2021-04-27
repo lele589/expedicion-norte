@@ -1,25 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
+import NavBar from './pages/components/Navbar/Navbar';
+
+const HomeView = React.lazy(() => import('./pages/Home/View'))
+const DetailPostView = React.lazy(() => import('./pages/Posts/detail/View'))
+const NewPostView = React.lazy(() => import('./pages/Posts/new_post/View'))
+const CategoryView = React.lazy(() => import('./pages/Posts/category/View'))
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <NavBar />
+      <Switch>
+            <Route path="/" exact>
+                <Suspense fallback={<div>Cargando...</div>}>
+                  <HomeView />
+              </Suspense>
+            </Route>
+
+            <Route path="/posts/nuevo">
+                <Suspense fallback={<div>Cargando...</div>}>
+                  <NewPostView />
+              </Suspense>
+            </Route>
+
+            <Route path="/posts/detail/:idPost">
+                <Suspense fallback={<div>Cargando...</div>}>
+                  <DetailPostView />
+              </Suspense>
+            </Route>
+
+            <Route path="/posts/:categoryName">
+                <Suspense fallback={<div>Cargando...</div>}>
+                  <CategoryView />
+              </Suspense>
+            </Route>
+          </Switch>
+  </BrowserRouter>
   );
 }
 
