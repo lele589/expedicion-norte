@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 import { LogoProps } from "./View.Types";
 import styles from "../../pages/components/Navbar/View.module.css";
-import logo from "../../assets/images/logo-dark.png";
+import logo from "../../assets/images/logo.svg";
 
 const Logo: FunctionComponent<LogoProps> = ({ onClick }) => {
 

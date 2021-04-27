@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import NavBar from './pages/components/Navbar/Navbar';
+import Navbar from './pages/components/Navbar/View';
 
 const HomeView = React.lazy(() => import('./pages/Home/View'))
 const DetailPostView = React.lazy(() => import('./pages/Posts/detail/View'))
@@ -11,7 +11,7 @@ const CategoryView = React.lazy(() => import('./pages/Posts/category/View'))
 function App() {
   return (
     <BrowserRouter>
-      <NavBar />
+      <Navbar />
       <Switch>
             <Route path="/" exact>
                 <Suspense fallback={<div>Cargando...</div>}>
