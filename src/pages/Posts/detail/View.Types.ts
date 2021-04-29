@@ -1,11 +1,20 @@
 import { RouteComponentProps } from 'react-router-dom';
 
-// Type whatever you expect in 'this.props.match.params.*'
 export type PathParamsType = {
     idPost: string,
 }
 
-// Your component own properties
-export type PropsType = RouteComponentProps<PathParamsType> & {
-    someString?: string,
+export interface PostType {
+    _id: string,
+    title: string,
+    category: string,
+    image: string,
+    location: string,
+    price: number,
+    description: string,
+    date: string,
+    public: boolean,
+    pets: boolean,
 }
+
+export type PropsType = RouteComponentProps<PathParamsType>

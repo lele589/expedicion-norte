@@ -1,0 +1,89 @@
+.headerContainer {
+    flex-direction: column;
+}
+
+.header {
+    background: #000;
+    padding: 2rem;
+}
+
+.category {
+    color: #b7b9c2;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.title {
+    font-size: 2.8rem;
+    line-height: 3.2rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+.imageContainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.image {
+    width: 100%;
+    display: block;
+}
+
+.date {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.itemTitle {
+    color: #439169;
+    font-size: 1rem;
+    margin-right: 5px;
+    font-weight: 500;
+}
+
+.itemDescr {
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+.locationLink {
+    font-size: 0.9rem;
+    color: #439169;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.locationLink .fas {
+    padding-right: 5px;
+}
+
+@media (min-width: 768px) {
+    .headerContainer {
+        flex-direction: row;
+    }
+
+    .header {
+        width: 600px;
+        max-width: 40%;
+        padding: 3rem;
+        order: 1;
+    }
+
+    .imageContainer {
+        display: block;
+        border-top: 20px solid white;
+        border-bottom: 20px solid white;
+        order: 2;
+        max-width: 60%;
+    }
+}
