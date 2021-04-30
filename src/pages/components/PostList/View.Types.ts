@@ -3,5 +3,7 @@ export type PostListProps  = {
     order?: string,
     orderBy?: string,
     category?: string,
-    layout: string
+    page?: number,
+    layout: string,
+    setNewPage?: any
 }
