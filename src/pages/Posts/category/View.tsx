@@ -1,21 +1,21 @@
-import { Component } from 'react'
+import { FunctionComponent } from 'react'
 import { withRouter } from 'react-router-dom';
+import lodash from 'lodash';
 
+import { BodyColor, Container, Title } from '../../../assets/styles/utils/utils'
+import PostList from '../../components/PostList/View'
 import { PropsType } from './View.Types'
 
-class CategoryView extends Component<PropsType> { 
-    constructor(props: any) {
-        super(props)
-    }
+const CategoryView: FunctionComponent<PropsType> = (props) => {
 
-    render() {
-
-        return (
-            <h1>
-                Category: {this.props.match.params.categoryName}
-            </h1>
-        )
-    }
+    return (
+        <BodyColor bgColor="#f2f4f6">
+            <Container paddingTop={30} paddingBottom={30}>
+                <Title textAlign="center">{lodash.capitalize(props.match.params.categoryName)}</Title>
+                <PostList layout="mosaic" category={props.match.params.categoryName} />
+            </Container>
+        </BodyColor>
+    )
 }
 
 export default withRouter(CategoryView)
