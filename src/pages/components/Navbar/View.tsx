@@ -58,6 +58,7 @@ const NavBar = () => {
                 <NavLink activeStyle={{color: '#439169'}} onClick={closeMobileMenu} to="/posts/cultura" exact className={styles.link}>Cultura</NavLink>
                 <NavLink activeStyle={{color: '#439169'}} onClick={closeMobileMenu} to="/posts/deporte" exact className={styles.link}>Deporte</NavLink>
                 <NavLink activeStyle={{color: '#439169'}} onClick={closeMobileMenu} to="/posts/nuevo" exact className={styles.link}>Crear post</NavLink>
+                <NavLink activeStyle={{color: '#439169'}} onClick={closeMobileMenu} to="/login" exact className={styles.link}>Iniciar sesión</NavLink>
             </div>
         </FlexDiv>
     );

@@ -7,6 +7,7 @@ const HomeView = React.lazy(() => import('./pages/Home/View'))
 const DetailPostView = React.lazy(() => import('./pages/Posts/detail/View'))
 const NewPostView = React.lazy(() => import('./pages/Posts/new_post/View'))
 const CategoryView = React.lazy(() => import('./pages/Posts/category/View'))
+const LoginView = React.lazy(() => import('./pages/Users/login/View'))
 
 function App() {
   return (
@@ -36,6 +37,12 @@ function App() {
                   <CategoryView />
               </Suspense>
             </Route>
+
+          <Route path="/login">
+              <Suspense fallback={<div>Cargando...</div>}>
+                  <LoginView />
+              </Suspense>
+          </Route>
           </Switch>
   </BrowserRouter>
   );
