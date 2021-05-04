@@ -12,7 +12,8 @@ const schema = yup.object().shape({
     title: yup.string().required(),
     category: yup.string().required(),
     image: yup.string().url(),
-    location: yup.string().url().required(),
+    location: yup.string().required(),
+    locationUrl: yup.string().url().required(),
     price: yup.number().min(0).max(1000).required(),
     description: yup.string().min(50).required()
 });
@@ -70,7 +71,15 @@ const PostForm = (props: any) => {
                     type="text"
                     {...register('location')}
                 />
-                {errors.location && <InputError>El campo "localización" es obligatorio y debe tener el formato correcto de URL (https://ejemplo.es/)</InputError>}
+                {errors.location && <InputError>El campo "localización" es obligatorio</InputError>}
+            </InputContainer>
+            <InputContainer>
+                <Label>Google Maps URL*</Label>
+                <Input
+                    type="text"
+                    {...register('locationUrl')}
+                />
+                {errors.locationUrl && <InputError>El campo "Google Maps URL" es obligatorio y debe tener el formato correcto de URL (https://ejemplo.es/)</InputError>}
             </InputContainer>
             <InputContainer>
                 <Label>Precio (€)*</Label>

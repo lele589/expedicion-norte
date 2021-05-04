@@ -3,6 +3,7 @@ export interface PostType {
     category: string,
     image: string,
     location: string,
+    locationUrl: string,
     price: number,
     description: string,
     date: string,
