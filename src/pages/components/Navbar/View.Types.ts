@@ -1,6 +1,6 @@
-export type NavbarEventProps = {
-    closeMobileMenu: () => void,
-    toggleMobileMenu: () => void,
+export type NavbarTypes = {
+    closeMobileMenu?: () => void,
+    toggleMobileMenu?: () => void,
+    onLogout?: () => void,
+    isUserLogged: boolean
 }
-
-export type NavbarTypes = NavbarEventProps

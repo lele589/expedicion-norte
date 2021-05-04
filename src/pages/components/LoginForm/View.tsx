@@ -2,10 +2,12 @@ import { useForm } from "react-hook-form";
 import { withRouter } from 'react-router';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { useDispatch } from "react-redux";
 
 import { InputContainer, Label, Input, InputError, Submit } from '../../../assets/styles/utils/utils'
 import UserService from "../../../services/UserService";
 import { UserType } from './View.Types'
+import * as actionTypes from '../../../store/actions';
 
 const schema = yup.object().shape({
     email: yup.string().required(),
@@ -18,11 +20,16 @@ const LoginForm = (props: any) => {
         resolver: yupResolver(schema)
     });
 
-    const onSubmit = (data: UserType) => {
-        console.log(data);
+    const dispatch = useDispatch();
 
+    const onSubmit = (data: UserType) => {
         UserService.loginUser(data)
             .then((data: any) => {
+                localStorage.setItem('token', JSON.stringify(data.token));
+                dispatch({
+                    type: actionTypes.USER_LOGGED,
+                    value: true
+                })
                 props.history.push('/');
             })
             .catch((error: any) => console.log(error))

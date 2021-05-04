@@ -1,17 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FunctionComponent } from 'react'
 import { NavLink } from 'react-router-dom'
 import lodash from 'lodash'
+import { useDispatch } from "react-redux";
+
+import * as actionTypes from '../../../store/actions'
 
 import Logo from '../../../components/Logo/View'
 import Breakpoint from '../../../assets/styles/responsive/breakpoints'
 import { FlexDiv } from '../../../assets/styles/utils/utils';
 import styles from './View.module.css'
+import { NavbarTypes } from './View.Types'
 
-const NavBar = () => {
+const NavBar: FunctionComponent<NavbarTypes> = ({ isUserLogged }) => {
 
     const breakpoint: number = 992;
     const [isListVisible, setIsListVisible] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         windowWidth >= breakpoint && setIsListVisible(true)
@@ -27,8 +33,15 @@ const NavBar = () => {
         setIsListVisible(false);
     }
     const toggleMobileMenu = (): void => {
-
         setIsListVisible(!isListVisible);
+    }
+    const onLogout = (): void => {
+        localStorage.removeItem('token');
+        dispatch({
+            type: actionTypes.USER_LOGGED,
+            value: false
+        })
+        closeMobileMenu()
     }
     const onWindowResize = (): void => {
         setWindowWidth(window.innerWidth);
@@ -58,7 +71,15 @@ const NavBar = () => {
                 <NavLink activeStyle={{color: '#439169'}} onClick={closeMobileMenu} to="/posts/cultura" exact className={styles.link}>Cultura</NavLink>
                 <NavLink activeStyle={{color: '#439169'}} onClick={closeMobileMenu} to="/posts/deporte" exact className={styles.link}>Deporte</NavLink>
                 <NavLink activeStyle={{color: '#439169'}} onClick={closeMobileMenu} to="/posts/nuevo" exact className={styles.link}>Crear post</NavLink>
-                <NavLink activeStyle={{color: '#439169'}} onClick={closeMobileMenu} to="/login" exact className={styles.link}>Iniciar sesión</NavLink>
+                { isUserLogged
+                    ?
+                    <>
+                        <NavLink activeStyle={{color: '#439169'}} onClick={closeMobileMenu} to="/profile" exact className={styles.link}>Mi perfil</NavLink>
+                        <NavLink to="/" className={styles.link} onClick={onLogout}>Cerrar sesión</NavLink>
+                    </>
+                    :
+                    <NavLink activeStyle={{color: '#439169'}} onClick={closeMobileMenu} to="/login" exact className={styles.link}>Iniciar sesión</NavLink>
+                }
             </div>
         </FlexDiv>
     );

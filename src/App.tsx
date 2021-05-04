@@ -1,7 +1,10 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { useSelector, useDispatch } from "react-redux"
 
-import Navbar from './pages/components/Navbar/View';
+import { RootState } from './store/store'
+import Navbar from './pages/components/Navbar/View'
+import * as actionTypes from './store/actions'
 
 const HomeView = React.lazy(() => import('./pages/Home/View'))
 const DetailPostView = React.lazy(() => import('./pages/Posts/detail/View'))
@@ -10,9 +13,23 @@ const CategoryView = React.lazy(() => import('./pages/Posts/category/View'))
 const LoginView = React.lazy(() => import('./pages/Users/login/View'))
 
 function App() {
+
+    const dispatch = useDispatch();
+    const isUserLogged = useSelector((state: RootState) => state.logged);
+
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            dispatch({
+                type: actionTypes.USER_LOGGED,
+                value: true
+            })
+        }
+    }, [isUserLogged]);
+
+    
   return (
     <BrowserRouter>
-      <Navbar />
+    <Navbar isUserLogged={isUserLogged} />
       <Switch>
             <Route path="/" exact>
                 <Suspense fallback={<div>Cargando...</div>}>
