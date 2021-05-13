@@ -1,4 +1,4 @@
-import {FunctionComponent, useEffect, useState} from "react";
+import {FunctionComponent, useEffect, useState, useLayoutEffect} from "react";
 
 import { FlexDiv } from "../../../assets/styles/utils/utils";
 import PostsService from "../../../services/PostsService";
@@ -7,7 +7,7 @@ import PostCard from "../../../components/PostCard/View";
 import Pagination from "../../../components/Pagination/View";
 import {PostCardType} from "../../../components/PostCard/View.Types";
 
-const PostList: FunctionComponent<PostListProps> = ({ layout, limit, orderBy, order, category, page }) => {
+const PostList: FunctionComponent<PostListProps> = ({ layout, limit, orderBy, order, category, page, onlyPublic}) => {
 
     const [posts, setPosts] = useState([])
     const [totalPages, setTotalPages] = useState<number| any>(0);
@@ -23,14 +23,14 @@ const PostList: FunctionComponent<PostListProps> = ({ layout, limit, orderBy, or
     }
 
     useEffect(() => {
-        PostsService.getPostList(limit, orderBy, order, category, page)
+        PostsService.getPostList(limit, orderBy, order, category, page, onlyPublic)
             .then((data: any) => {
                 savePostsData(data);
             })
             .catch((error: any) => console.log(error))
     }, [location.pathname]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         PostsService.getPostList(limit, orderBy, order, category, newPage)
             .then((data: any) => {
                 savePostsData(data);

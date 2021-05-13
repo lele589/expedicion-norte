@@ -5,5 +5,6 @@ export type PostListProps  = {
     category?: string,
     page?: number,
     layout: string,
-    setNewPage?: any
+    setNewPage?: any,
+    onlyPublic: boolean
 }
