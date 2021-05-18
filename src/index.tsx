@@ -7,11 +7,14 @@ import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './store/reducer';
+import Modal from 'react-modal';
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(reducer, composeEnhancers());
+
+Modal.setAppElement('#root')
 
 ReactDOM.render(
   <React.StrictMode>
