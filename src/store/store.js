@@ -3,6 +3,9 @@ import { configureStore } from '@reduxjs/toolkit'
 const store = configureStore({
     reducer: {
         logged: reducer,
+        isModalOpen: reducer,
+        currentShareUrl: reducer
+        currentShareTitle: reducer
     }
 })
 
