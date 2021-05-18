@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 
 import { RootState } from './store/store'
 import Navbar from './pages/components/Navbar/View'
+import ShareModal from './components/ShareModal/View'
 import * as actionTypes from './store/actions'
 
 const HomeView = React.lazy(() => import('./pages/Home/View'))
@@ -30,7 +31,8 @@ function App() {
   return (
     <BrowserRouter>
     <Navbar isUserLogged={isUserLogged} />
-      <Switch>
+    <ShareModal />
+    <Switch>
             <Route path="/" exact>
                 <Suspense fallback={<div>Cargando...</div>}>
                   <HomeView />
