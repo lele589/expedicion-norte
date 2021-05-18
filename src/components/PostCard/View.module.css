@@ -1,16 +1,18 @@
 .category {
     color: #b7b9c2;
-    font-size: 14px;
+    font-size: .9rem;
     text-transform: uppercase;
+    margin-bottom: 5px;
 }
 
 .title {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin: 5px 0;
     line-height: 1.5rem;
     font-weight: 500;
     text-decoration: none;
     color: #000;
+    position: relative;
 }
 
 .title:hover, .title:focus {
@@ -26,20 +28,37 @@
     height: 100%;
 }
 
-.location {
+.item {
     display: flex;
-    align-items: center;
-    color: #439169;
+    align-items: stretch;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 17px;
+    color: #439169;
+    max-width: 70%;
 }
 
-.locationName {
-    font-size: 14px;
-    margin-left: 3px;
+.itemName {
+    color: #666;
+    font-size: 15px;
+    margin-left: 5px;
 }
 
-.price {
-    color: #b7b9c2;
-    font-size: 14px;
+.footer {
+    border-top: 1px solid #efefef;
+    margin-top: 20px;
+}
+
+.icon {
+    color: #999;
+    margin-right: 20px;
+    font-size: 1.2rem;
+}
+
+.more {
+    text-decoration: none;
+    color: #439169;
+}
+
+.moreIcon {
+    margin-left: 5px;
 }

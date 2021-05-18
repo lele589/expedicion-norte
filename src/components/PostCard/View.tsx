@@ -1,9 +1,12 @@
 import {FunctionComponent} from "react";
 import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
+import { useSelector } from "react-redux"
 
+import { RootState } from '../../store/store'
 import { FlexDiv } from "../../assets/styles/utils/utils";
 import { PostCardProps } from './View.Types'
+import ShareTrigger from '../ShareTrigger/View'
 import styles from './View.module.css'
 
 type layoutType = {
@@ -11,33 +14,33 @@ type layoutType = {
 }
 
 const Card = styled.div<layoutType>`
-    background-color: #fff;
-    margin: 20px;
-    display: flex;
-    width: 100%;
-  
-      @media (min-width: 768px) {
-        width: 50%;
-      }
-    
-      @media (min-width: 992px) {
-        width: 33%;
-      }
-      @media (min-width: 1200px) {
-        width: 25%;
-      }
+  background-color: #fff;
+  margin: 20px;
+  display: flex;
+  width: 100%;
 
-      ${({ layout }) => {
-        if (layout === 'column') {
-          return css`
-                    flex-direction: row;
-                `
-        } else {
-          return css`
-                  flex-direction: column;
-                `
-        }
-      }}
+  @media (min-width: 768px) {
+    width: 50%;
+  }
+
+  @media (min-width: 992px) {
+    width: 33%;
+  }
+  @media (min-width: 1200px) {
+    width: 25%;
+  }
+
+  ${({ layout }) => {
+    if (layout === 'column') {
+      return css`
+        flex-direction: row;
+      `
+    } else {
+      return css`
+        flex-direction: column;
+      `
+    }
+  }}
 `;
 
 const ThumbContainer = styled.div<layoutType>`
@@ -45,18 +48,18 @@ const ThumbContainer = styled.div<layoutType>`
   min-height: 200px;
   width: 100%;
   overflow: hidden;
-  
+
   ${({ layout }) => {
     if (layout === 'column') {
-        return css`
-            width: 30%;
-        `
+      return css`
+        width: 30%;
+      `
     } else {
-        return css`
-            width: 100%;
-        `
+      return css`
+        width: 100%;
+      `
     }
-}}
+  }}
 `;
 
 const Thumb = styled.img`
@@ -70,29 +73,48 @@ const Thumb = styled.img`
 
 const PostCard: FunctionComponent<PostCardProps> = ({post, layout}) => {
 
-   return(
-      <Card layout={layout}>
-          <ThumbContainer layout={layout} >
-              <Thumb src={post.image} alt={post.title} />
-          </ThumbContainer>
-          <div className={styles.info}>
-              <div>
-                  <div className={styles.category}>{post.category}</div>
-                  <Link
-                      className={styles.title}
-                      to={"/posts/detail/" + post['_id']}
-                  >{post.title}</Link>
-              </div>
-              <FlexDiv justifyContent="space-between" padding="10px 0 0 0">
-                  <a className={styles.location} href={post.location} target="_blank" rel="noopener noreferrer">
-                      <i className="fas fa-map-marker-alt" />
-                      <span className={styles.locationName}>Cómo llegar</span>
-                  </a>
-                  <div className={styles.price}>{post.price === 0 ? 'Gratis' : post.price + '€'}</div>
-              </FlexDiv>
-          </div>
-      </Card>
-   )
+    const isUserLogged = useSelector((state: RootState) => state.logged);
+    const shareUrl = process.env.REACT_APP_DOMAIN_URL + "posts/detail/" + post['_id'];
+
+    return(
+        <Card layout={layout}>
+            <ThumbContainer layout={layout} >
+                <Thumb src={post.image} alt={post.title} />
+            </ThumbContainer>
+            <div className={styles.info}>
+                <div>
+                    <div className={styles.category}>{post.category}</div>
+                    <Link
+                        className={styles.title}
+                        to={"/posts/detail/" + post['_id']}
+                    >{post.title}</Link>
+                </div>
+                <FlexDiv justifyContent="space-between" padding="25px 0 0 0">
+                    <a className={styles.item} href={post.locationUrl} target="_blank" rel="noopener noreferrer">
+                        <i className="fas fa-map-marker-alt" />
+                        <span className={styles.itemName}>{post.location}</span>
+                    </a>
+                    <div className={styles.item}>
+                        <i className="fas fa-coins" />
+                        <span className={styles.itemName}>{post.price === 0 ? 'Gratis' : post.price + '€'}</span>
+                    </div>
+                </FlexDiv>
+                <FlexDiv className={styles.footer} justifyContent="space-between" padding="10px 0 0 0">
+                    <FlexDiv>
+                        { isUserLogged && <i className={styles.icon + " fas fa-heart"} />}
+                        <ShareTrigger url={shareUrl} title={post.title} iconStyles={styles.icon} />
+                    </FlexDiv>
+                    <Link
+                        className={styles.more}
+                        to={"/posts/detail/" + post['_id']}
+                    >
+                        <span>Ver más</span>
+                        <i className={styles.moreIcon + " fas fa-arrow-right"} />
+                    </Link>
+                </FlexDiv>
+            </div>
+        </Card>
+    )
 }
 
 export default PostCard
