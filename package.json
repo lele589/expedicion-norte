@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@hookform/resolvers": "^2.4.0",
+    "@svgr/cli": "^5.5.0",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
@@ -38,7 +39,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "icons": "npx svgr --icon --replace-attr-values '#000=currentColor' --template src/components/Icon/icon-template.js --index-template src/components/Icon/icon-index-template.js --out-dir src/components/Icon/Icons src/assets/icons"
   },
   "eslintConfig": {
     "extends": [
