@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react'
 import { useDispatch } from "react-redux"
 
 import * as actionTypes from '../../store/actions'
+import { Icon } from './../Icon/Icons'
 import { ShareTriggerProps } from './View.Types'
 import styles from './View.module.css'
 
@@ -23,7 +24,7 @@ const ShareTrigger:FunctionComponent<ShareTriggerProps> = ({ iconStyles, url, ti
 
     return(
         <button onClick={handleClick} className={styles.button}>
-            <i className={iconStyles + " fas fa-share-alt"}></i>
+            <Icon.ShareFull fontSize={20} />
         </button>
     )
 }

@@ -8,6 +8,7 @@ import { FlexDiv } from "../../assets/styles/utils/utils";
 import { PostCardProps } from './View.Types'
 import ShareTrigger from '../ShareTrigger/View'
 import styles from './View.module.css'
+import { Icon } from './../Icon/Icons'
 
 type layoutType = {
     layout: string
@@ -91,11 +92,11 @@ const PostCard: FunctionComponent<PostCardProps> = ({post, layout}) => {
                 </div>
                 <FlexDiv justifyContent="space-between" padding="25px 0 0 0">
                     <a className={styles.item} href={post.locationUrl} target="_blank" rel="noopener noreferrer">
-                        <i className="fas fa-map-marker-alt" />
+                        <Icon.PinFull color="#5baaa1" fontSize={20} />
                         <span className={styles.itemName}>{post.location}</span>
                     </a>
                     <div className={styles.item}>
-                        <i className="fas fa-coins" />
+                        <Icon.Coins color="#5baaa1" fontSize={20} block={false}/>
                         <span className={styles.itemName}>{post.price === 0 ? 'Gratis' : post.price + '€'}</span>
                     </div>
                 </FlexDiv>
@@ -109,7 +110,7 @@ const PostCard: FunctionComponent<PostCardProps> = ({post, layout}) => {
                         to={"/posts/detail/" + post['_id']}
                     >
                         <span>Ver más</span>
-                        <i className={styles.moreIcon + " fas fa-arrow-right"} />
+                        <Icon.ArrowRightV2 className={styles.moreIcon} />
                     </Link>
                 </FlexDiv>
             </div>
